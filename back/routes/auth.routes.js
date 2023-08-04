@@ -4,6 +4,10 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/User.model");
 const { isAuthenticated } = require("../middlewares/isAuthenticated");
 
+router.get("/", (req, res, next) => {
+	res.json("All good in auth");
+});
+
 /* POST route to signup */
 router.post("/signup", async (req, res, next) => {
 	/* Get back the payload from your request, as it's a POST you can access req.body */
@@ -59,9 +63,11 @@ router.post("/login", async (req, res, next) => {
 });
 
 /* GET route to verify token */
-router.get("/verify", (req, res, next) => {
+router.get("/verify", isAuthenticated, async (req, res, next) => {
 	// You need to use the middleware there, if the request passes the middleware, it means your token is good
-	res.json("Pinging verify");
+	const currentUser = await User.findById(req.payload.userId);
+	currentUser.password = "*****";
+	res.status(200).json({ message: "Token is valid", currentUser });
 });
 
 module.exports = router;

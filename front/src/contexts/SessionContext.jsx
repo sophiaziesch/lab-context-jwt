@@ -19,6 +19,7 @@ const SessionContextWrapper = ({ children }) => {
 				const { data } = await axios.get(API_URL, {
 					headers: { Authorization: `Bearer ${tokenInStorage}` },
 				});
+				console.log("Verify response from context: ", data);
 				setUser(data.currentUser);
 				setIsLoading(false);
 				setIsLoggedIn(true);
