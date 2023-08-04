@@ -3,5 +3,11 @@
     "front": "cd ./front && npm run dev",
     "back": "cd ./back && npm run dev",
     "deps": "cd ./front && npm i && cd ../back && npm i"
+  },
+  "dependencies": {
+    "axios": "^1.4.0",
+    "bcrypt": "^5.1.0",
+    "dotenv": "^16.3.1",
+    "react-router-dom": "^6.14.2"
   }
 }
